@@ -1,13 +1,16 @@
 from uuid import uuid4
 from os.path import splitext
 from os.path import join as path_join
+from os import remove as remove_file
 
 from flask import Flask, request, render_template, redirect, url_for, session, abort, flash, session
+from sqlalchemy.exc import IntegrityError
 
 from werkzeug.utils import secure_filename
 
 from .auth import login_required, logout_required
 from .forms import SubmitForm
+from .models import db, Submission
 
 from . import app
 
@@ -42,7 +45,27 @@ def play():
         filename = secure_filename(str(uuid4()) + ext)
         file_path = path_join(app.root_path, app.config['UPLOAD_FOLDER'], filename)
         f.save(file_path)
-        return redirect(url_for('.submission'))
+
+        try:
+            submission = Submission(
+                image_path=filename,
+                prompt_id=1,
+                submitted_by=session.get('account_id'),
+                passes_prompt=False
+            )
+
+            db.session.add(submission)
+            db.session.commit()
+
+            session['recent_image_path'] = filename
+            return redirect(url_for('.submission'))
+
+        except IntegrityError as e:
+            remove_file(file_path)
+            flash(str(e))
+            flash('There was an error uploading your submission')
+            return redirect(url_for('.submission'))
+
 
     return render_template('play.html', form=form)
 
@@ -54,7 +77,11 @@ def submission():
     get: viewing submission and confirming
     post: user confirms submission for evaluation
     """
-    return render_template('submission.html')
+    if session.get('recent_image_path'):
+        image_path = session.get('recent_image_path')
+        return render_template('submission.html', image_path=image_path)
+
+    abort(404)
 
 
 @app.route('/feedback')
