@@ -1,6 +1,13 @@
+from uuid import uuid4
+from os.path import splitext
+from os.path import join as path_join
+
 from flask import Flask, request, render_template, redirect, url_for, session, abort, flash, session
 
+from werkzeug.utils import secure_filename
+
 from .auth import login_required, logout_required
+from .forms import SubmitForm
 
 from . import app
 
@@ -20,7 +27,24 @@ def play():
     get: visiting page to submit photo
     post: receiving submission form from user
     """
-    return render_template('play.html')
+    form = SubmitForm()
+
+    if form.validate_on_submit():
+        allowed_filetypes = set(['.png', '.jpg', '.jpeg'])
+
+        f = form.file_upload.data
+        ext = splitext(f.filename)[1]
+
+        if ext not in allowed_filetypes:
+            flash('File must be a .png or a .jpg/.jpeg')
+            return redirect(url_for('.play'))
+
+        filename = secure_filename(str(uuid4()) + ext)
+        file_path = path_join(app.root_path, app.config['UPLOAD_FOLDER'], filename)
+        f.save(file_path)
+        return redirect(url_for('.submission'))
+
+    return render_template('play.html', form=form)
 
 
 @app.route('/submission', methods=['GET', 'POST'])

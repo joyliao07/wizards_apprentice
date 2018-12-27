@@ -7,7 +7,9 @@
   <div class="img-wizard">
     <!-- Wizard's picture here. -->
   </div>
-  <div class="">
-    <button type="button"><a href="{{ url_for(".submission") }}"> Upload </a></button>
-  </div>
+  <form action="/play" method="POST"  enctype="multipart/form-data">
+    {{ form.csrf_token }}
+    {{ form.file_upload.label }} {{ form.file_upload }}
+    <input type="submit">
+  </form>
 {% endblock content %}

@@ -1,12 +1,14 @@
 from flask import session
+
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, FileField
+from wtforms import StringField, PasswordField
+from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, length
 
 
 class SubmitForm(FlaskForm):
-    file_upload = FileField('Upload File', validators=[DataRequired()])
+    file_upload = FileField('Upload File', validators=[FileRequired()])
 
 
 class AuthForm(FlaskForm):
