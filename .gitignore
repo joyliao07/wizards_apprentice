@@ -125,3 +125,4 @@ auth.json
 .DS_Store
 .vscode
 .idea
+src/static/uploads/*
