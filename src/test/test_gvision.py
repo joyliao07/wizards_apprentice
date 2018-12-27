@@ -12,11 +12,11 @@ def test_import():
 
 
 def test_instance():
-    img_source = './uploads/green_car.jpg'
+    img_source = './src/static/uploads/green_car.jpg'
     assert ProcessedImage(img_source)
 
 
 def test_labels():
-    img_source = './uploads/green_car.jpg'
+    img_source = './src/static/uploads/green_car.jpg'
     image = ProcessedImage(img_source)
     assert 'car' in image.keywords
