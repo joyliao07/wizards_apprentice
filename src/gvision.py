@@ -10,6 +10,7 @@ class ProcessedImage(object):
     data scoped to the properties that we are most interested in.
 
     """
+
     def __init__(self, source):
         """
         input: source (string) path to the image file
@@ -59,7 +60,6 @@ class ProcessedImage(object):
             print('The image file was not found.')
         if properties:
             return properties
-
 
     def get_colors(self):
         """Extract color data from image_properties.
