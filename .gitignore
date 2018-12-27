@@ -119,10 +119,11 @@ venv.bak/
 # data
 curriculum/class-06/API_NY.GDP.PCAP.CD_DS2_en_csv_v2.csv
 
-# API keys
-auth.json
 # other things
 .DS_Store
 .vscode
 .idea
-src/static/uploads/*
+
+
+# things related to this project specifically
+static/uploads/

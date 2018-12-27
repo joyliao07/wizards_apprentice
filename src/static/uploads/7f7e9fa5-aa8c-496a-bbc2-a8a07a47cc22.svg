@@ -1,0 +1,66 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="664.703125" height="832" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<text style='fill: black; font-size: 16px;' x='453.703125' y='820'> obsessed</text>
+<text style='fill: black; font-size: 16px;' x='539.703125' y='820'> with recursion</text>
+<text style='fill: black; font-size: 16px;' x='392.5625' y='754'> really</text>
+<text style='fill: black; font-size: 16px;' x='483.703125' y='754'>A</text>
+<line style='stroke:black; stroke-width:1;' x1='489' y1='797' x2='489' y2='761' />
+<text style='fill: black; font-size: 16px;' x='586.0390625' y='754'>PP</text>
+<polygon style='fill: white; stroke: black; stroke-width:1;' points='649 797 540 797 595 761' />
+<text style='fill: black; font-size: 16px;' x='331.421875' y='688'> really</text>
+<text style='fill: black; font-size: 16px;' x='405.6328125' y='688'>AP</text>
+<line style='stroke:black; stroke-width:1;' x1='416' y1='731' x2='416' y2='695' />
+<text style='fill: black; font-size: 16px;' x='534.453125' y='688'>A′</text>
+<line style='stroke:black; stroke-width:1;' x1='489' y1='731' x2='542' y2='695' />
+<line style='stroke:black; stroke-width:1;' x1='595' y1='731' x2='542' y2='695' />
+<text style='fill: black; font-size: 16px;' x='270.28125' y='622'> really</text>
+<text style='fill: black; font-size: 16px;' x='344.4921875' y='622'>AP</text>
+<line style='stroke:black; stroke-width:1;' x1='354' y1='665' x2='354' y2='629' />
+<text style='fill: black; font-size: 16px;' x='471.29296875' y='622'>A′</text>
+<line style='stroke:black; stroke-width:1;' x1='416' y1='665' x2='479' y2='629' />
+<line style='stroke:black; stroke-width:1;' x1='542' y1='665' x2='479' y2='629' />
+<text style='fill: black; font-size: 16px;' x='209.140625' y='556'> really</text>
+<text style='fill: black; font-size: 16px;' x='283.3515625' y='556'>AP</text>
+<line style='stroke:black; stroke-width:1;' x1='293' y1='599' x2='293' y2='563' />
+<text style='fill: black; font-size: 16px;' x='409.142578125' y='556'>A′</text>
+<line style='stroke:black; stroke-width:1;' x1='354' y1='599' x2='417' y2='563' />
+<line style='stroke:black; stroke-width:1;' x1='479' y1='599' x2='417' y2='563' />
+<text style='fill: black; font-size: 16px;' x='148.0' y='490'> really</text>
+<text style='fill: black; font-size: 16px;' x='222.2109375' y='490'>AP</text>
+<line style='stroke:black; stroke-width:1;' x1='232' y1='533' x2='232' y2='497' />
+<text style='fill: black; font-size: 16px;' x='347.4970703125' y='490'>A′</text>
+<line style='stroke:black; stroke-width:1;' x1='293' y1='533' x2='355' y2='497' />
+<line style='stroke:black; stroke-width:1;' x1='417' y1='533' x2='355' y2='497' />
+<text style='fill: black; font-size: 16px;' x='161.0703125' y='424'>AP</text>
+<line style='stroke:black; stroke-width:1;' x1='171' y1='467' x2='171' y2='431' />
+<text style='fill: black; font-size: 16px;' x='286.10400390625' y='424'>A′</text>
+<line style='stroke:black; stroke-width:1;' x1='232' y1='467' x2='294' y2='431' />
+<line style='stroke:black; stroke-width:1;' x1='355' y1='467' x2='294' y2='431' />
+<text style='fill: black; font-size: 16px;' x='110.0' y='358'> be</text>
+<text style='fill: black; font-size: 16px;' x='224.837158203125' y='358'>A′</text>
+<line style='stroke:black; stroke-width:1;' x1='171' y1='401' x2='232' y2='365' />
+<line style='stroke:black; stroke-width:1;' x1='294' y1='401' x2='232' y2='365' />
+<text style='fill: black; font-size: 16px;' x='116.0' y='292'>V</text>
+<line style='stroke:black; stroke-width:1;' x1='121' y1='335' x2='121' y2='299' />
+<text style='fill: black; font-size: 16px;' x='222.337158203125' y='292'>AP</text>
+<line style='stroke:black; stroke-width:1;' x1='232' y1='335' x2='232' y2='299' />
+<text style='fill: black; font-size: 16px;' x='53.0' y='226'> must</text>
+<text style='fill: black; font-size: 16px;' x='169.9185791015625' y='226'>V′</text>
+<line style='stroke:black; stroke-width:1;' x1='121' y1='269' x2='177' y2='233' />
+<line style='stroke:black; stroke-width:1;' x1='232' y1='269' x2='177' y2='233' />
+<text style='fill: black; font-size: 16px;' x='5.0' y='160'> You</text>
+<text style='fill: black; font-size: 16px;' x='71.1640625' y='160'>I</text>
+<line style='stroke:black; stroke-width:1;' x1='74' y1='203' x2='74' y2='167' />
+<text style='fill: black; font-size: 16px;' x='167.4185791015625' y='160'>VP</text>
+<line style='stroke:black; stroke-width:1;' x1='177' y1='203' x2='177' y2='167' />
+<text style='fill: black; font-size: 16px;' x='11.3359375' y='94'>NP</text>
+<polygon style='fill: white; stroke: black; stroke-width:1;' points='37 137 5 137 21 101' />
+<text style='fill: black; font-size: 16px;' x='120.62335205078125' y='94'>I′</text>
+<line style='stroke:black; stroke-width:1;' x1='74' y1='137' x2='125' y2='101' />
+<line style='stroke:black; stroke-width:1;' x1='177' y1='137' x2='125' y2='101' />
+<text style='fill: black; font-size: 16px;' x='66.14370727539062' y='28'>IP</text>
+<line style='stroke:black; stroke-width:1;' x1='21' y1='71' x2='73' y2='35' />
+<line style='stroke:black; stroke-width:1;' x1='125' y1='71' x2='73' y2='35' />
+</svg>
