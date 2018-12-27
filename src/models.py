@@ -33,7 +33,7 @@ class Submission(db.Model):
 class Prompt(db.Model):
     """ A single prompt which users make submissions to.
 
-    References many submissions, made by many users (submissions) """
+    References many submissions (submissions) made by many users """
     __tablename__ = 'prompts'
 
     id = db.Column(db.Integer, primary_key=True)
