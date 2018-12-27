@@ -39,6 +39,8 @@ class Prompt(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     submissions = db.relationship('Submission', backref='prompts')
     prompt_words = db.Column(db.String(128))
+    adjective = db.Column(db.String(128))   # Color of the thing to find
+    noun = db.Column(db.String(128))        # The thing to find
 
     def __repr__(self):
         return f'<Prompt "{self.prompt_words}">'
