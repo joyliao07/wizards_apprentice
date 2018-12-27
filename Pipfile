@@ -15,6 +15,7 @@ psycopg2-binary = "*"
 coverage = "*"
 flask-wtf = "*"
 google-cloud-vision = "*"
+flask-migrate = "*"
 
 [requires]
 python_version = "3.6"
