@@ -6,7 +6,15 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+flask = "*"
+pytest = "*"
+requests = "*"
+flask-sqlalchemy = "*"
+passlib = "*"
+psycopg2-binary = "*"
+coverage = "*"
+flask-wtf = "*"
 google-cloud-vision = "*"
 
 [requires]
-python_version = "2.7"
+python_version = "3.6"

@@ -55,6 +55,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+.pytest_cache/
 
 # Translations
 *.mo
@@ -65,6 +66,8 @@ coverage.xml
 .static_storage/
 .media/
 local_settings.py
+local_settings.py
+db.sqlite3
 
 # Flask stuff:
 instance/
@@ -118,3 +121,7 @@ curriculum/class-06/API_NY.GDP.PCAP.CD_DS2_en_csv_v2.csv
 
 # API keys
 auth.json
+# other things
+.DS_Store
+.vscode
+.idea
