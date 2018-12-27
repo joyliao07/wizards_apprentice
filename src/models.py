@@ -13,26 +13,41 @@ migrate = Migrate(app, db)
 
 
 class Submission(db.Model):
+    """ A single submission by a user.
+
+    References one user (submitted_by) and one prompt (prompt_id) """
     __tablename__ = 'submissions'
 
     id = db.Column(db.Integer, primary_key=True)
     image_path = db.Column(db.String(256), index=True, nullable=False, unique=True)
     prompt_id = db.Column(db.Integer, db.ForeignKey('prompts.id'))
-    account_id = db.Column(db.Integer, db.ForeignKey('accounts.id'))
+    submitted_by = db.Column(db.Integer, db.ForeignKey('accounts.id'))
     passes_prompt = db.Column(db.Boolean)
 
     submission_time = db.Column(db.DateTime, default=dt.now())
 
+    def __repr__(self):
+        return f'<Submission for prompt {self.prompt_id} by user>'
+
 
 class Prompt(db.Model):
+    """ A single prompt which users make submissions to.
+
+    References many submissions, made by many users (submissions) """
     __tablename__ = 'prompts'
 
     id = db.Column(db.Integer, primary_key=True)
     submissions = db.relationship('Submission', backref='prompts')
     prompt_words = db.Column(db.String(128))
 
+    def __repr__(self):
+        return f'<Prompt "{self.prompt_words}">'
+
 
 class Account(db.Model):
+    """ A user account.
+
+    References many submissions (submissions) to many prompts by this user """
     __tablename__ = 'accounts'
 
     id = db.Column(db.Integer, primary_key=True)
