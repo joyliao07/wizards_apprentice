@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for("static", filename="css/normalize.css") }}">
+  <link rel="stylesheet" href="{{ url_for("static", filename="css/skeleton.css") }}">
+  <link rel="stylesheet" href="{{ url_for("static", filename="css/style.css") }}">
+  <title>Wizard's Apprentice</title>
+</head>
+<body>
+  <header>
+    <p>Wizard's Apprentice</p>
+    <nav class="nav">
+      <ul>
+        <li><a href="{{ url_for(".home") }}">Home</a></li>
+
+        <!-- IF THE USER HAS LOGGED IN: {% if g.user %} -->
+        <li><a href="{{ url_for(".play") }}">Play</a></li>
+        <li><a href="{{ url_for(".submission") }}">Submission</a></li>
+        <li><a href="{{ url_for(".feedback") }}">Submission Feedback</a></li>
+        <li><a href="{{ url_for(".user_history") }}">My History</a></li>
+        <li><a href="{{ url_for(".all_players") }}">All Players</a></li>
+        <!-- IF THE USER HAS NOT LOGGED IN: {% else %} -->
+        <li><a href="{{ url_for(".register") }}">Register</a></li>
+        <li><a href="{{ url_for(".login") }}">Login</a></li>
+        <!-- {% endif %} -->
+      </ul>
+    </nav>
+  </header>
+  <main>
+    {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+    {% endfor %}
+
+    {% block content %}
+      <h3>Put Content Here</h3>
+    {% endblock content%}
+  </main>
+  <footer>
+    copy2018
+  </footer>
+</body>
+</html>

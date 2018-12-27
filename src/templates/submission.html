@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="submission">
+    <h3 class="">Your Picture: </h3>
+  </div>
+  <div class="uploaded">
+    <!-- User's uploaded image here. -->
+  </div>
+  <div class="">
+    <button type="button"><a href="{{ url_for(".feedback") }}"> Submit </a></button>
+    <button type="button"><a href="{{ url_for(".play") }}"> Reload </a></button>
+  </div>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="feedback">
+    <!-- IF THE PICTURE IS QUALIFIED: {% if ... %} -->
+    <h3 class="">You got it!</h3>
+    <!-- IF THE PICTURE IS NOT QUALIFIED: {% else %} -->
+    <h3 class="">I don't think so.</h3>
+    <!-- {% endif %} -->
+  </div>
+  <div class="img-wizard">
+    <!-- Wizard's picture here -->
+  </div>
+  <div class="">
+    <button type="button"><a href="{{ url_for(".play") }}"> Try Again </a></button>
+  </div>
+{% endblock content %}
