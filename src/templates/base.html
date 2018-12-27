@@ -12,16 +12,15 @@
     <nav class="nav">
       <ul>
         <li><a href="{{ url_for(".home") }}">Home</a></li>
-
-        <!-- IF THE USER HAS LOGGED IN: {% if g.user %} -->
-        <li><a href="{{ url_for(".play") }}">Play</a></li>
-        <li><a href="{{ url_for(".history") }}">My History</a></li>
-        <li><a href="{{ url_for(".players") }}">All Players</a></li>
-        <li><a href="{{ url_for(".logout" }}">Logout</a></li>
-        <!-- IF THE USER HAS NOT LOGGED IN: {% else %} -->
-        <li><a href="{{ url_for(".register") }}">Register</a></li>
-        <li><a href="{{ url_for(".login") }}">Login</a></li>
-        <!-- {% endif %} -->
+        {% if g.user %}
+          <li><a href="{{ url_for(".play") }}">Play</a></li>
+          <li><a href="{{ url_for(".history") }}">My History</a></li>
+          <li><a href="{{ url_for(".players") }}">All Players</a></li>
+          <li><a href="{{ url_for(".logout") }}">Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for(".register") }}">Register</a></li>
+          <li><a href="{{ url_for(".login") }}">Login</a></li>
+        {% endif %}
       </ul>
     </nav>
   </header>

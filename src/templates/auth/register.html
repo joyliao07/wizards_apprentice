@@ -4,9 +4,10 @@
 <div class="register">
   <h2>Register:</h2>
   <form action="{{ url_for(".register") }}" method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.email.label }}{{ form.email(size=48) }}
-    {{ form.password.label }}{{ form.password(size=48) }}
+    {{ form.csrf_token }}
+    {{ form.username.label }}{{ form.username(size=16) }}
+    {{ form.email.label }}{{ form.email(size=128) }}
+    {{ form.password.label }}{{ form.password(size=32) }}
     <input type="submit" name="register_form" value="Go">
   </form>
 </div>
