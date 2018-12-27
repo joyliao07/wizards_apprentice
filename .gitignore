@@ -1,7 +1,17 @@
+Source: https://github.com/github/gitignore/blob/master/Python.gitignore
+
+# User generated
+ENV/
+.vscode
+.idea
+.DS_Store
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
 
 # C extensions
 *.so
@@ -53,6 +63,9 @@ coverage.xml
 
 # Django stuff:
 *.log
+.static_storage/
+.media/
+local_settings.py
 local_settings.py
 db.sqlite3
 
@@ -103,6 +116,11 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# data
+curriculum/class-06/API_NY.GDP.PCAP.CD_DS2_en_csv_v2.csv
+
+# API keys
+auth.json
 # other things
 .DS_Store
 .vscode

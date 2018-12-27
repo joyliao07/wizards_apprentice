@@ -14,6 +14,7 @@ passlib = "*"
 psycopg2-binary = "*"
 coverage = "*"
 flask-wtf = "*"
+google-cloud-vision = "*"
 flask-migrate = "*"
 
 [requires]
