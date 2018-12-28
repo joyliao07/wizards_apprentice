@@ -390,7 +390,7 @@
    margin: 4px;
    text-align: center;
    vertical-align: middle;
-   cursor: url(https://unpkg.com/nes.css/assets/cursor-click.png), pointer;
+   cursor: pointer;
    -webkit-user-select: none;
       -moz-user-select: none;
        -ms-user-select: none;
