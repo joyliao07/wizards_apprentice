@@ -1,10 +1,12 @@
 from uuid import uuid4
+from datetime import datetime, timedelta
 from os.path import splitext
 from os.path import join as path_join
 from os import remove as remove_file
 
 from flask import Flask, request, render_template, redirect, url_for, session, abort, flash, session, g
 from sqlalchemy.exc import IntegrityError
+from sqlalchemy import func
 
 from werkzeug.utils import secure_filename
 
@@ -139,6 +141,26 @@ def history():
     user = g.user.id
     all = Submission.query.filter(Submission.submitted_by == user).order_by(Submission.submission_time.desc()).all()
 
+    # To get the number of submission all time:
+    all_time_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).count()
+
+    # To get the number of submission today:
+
+    date = datetime.now().date()
+
+    today_count = Submission.query.filter(Submission.submitted_by == user).filter(
+        Submission.passes_prompt == True).filter(func.date(Submission.submission_time) == date).count()
+
+    # To get the number of submission of the past week:
+
+    now = datetime.now()
+    week_ago = now - timedelta(days=7)
+
+    week_count = Submission.query.filter(Submission.submitted_by == user).filter(
+        Submission.passes_prompt == True).filter(Submission.submission_time > week_ago).count()
+
+    # To Pass all submission history:
+
     history = []
 
     for what in all:
@@ -153,7 +175,9 @@ def history():
             'result': 'Pass' if what.passes_prompt is True else 'Fail'
         })
 
-    return render_template('history.html', history=history)
+        time = str(what.submission_time)[:10]
+
+    return render_template('history.html', history=history, all_time_count=all_time_count, today_count=today_count, week_count=week_count)
 
 
 @app.route('/players')
