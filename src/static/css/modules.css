@@ -1,0 +1,160 @@
+/* --- header - logo --- */
+
+header p {
+    padding: .5em;
+    float: left;
+    font-family: LB;
+    font-size: 2em;
+    margin-bottom: 0;
+}
+
+header p a {
+    color: #f7d51d;
+}
+
+header p a:hover {
+    color: #f2c409;
+}
+
+
+/* --- header - nav --- */
+
+nav {
+    float: right;
+}
+
+nav ul,
+nav input {
+    display: none;
+}
+
+nav input:checked ~ ul {
+    display: block;
+}
+
+nav li a {
+    color: whitesmoke;
+    font-size: 1.25em;
+}
+
+nav li a:active,
+nav li a:hover {
+    color: rgb(197, 197, 197);
+}
+
+@media (max-width: 1023px) {
+    nav label {
+        color: white;
+        display: block;
+        font-size: 2em;
+        margin-bottom: 0;
+        padding: .5em;
+    }
+
+    nav label:hover {
+        cursor: pointer;
+    }
+
+    nav ul {
+        background-color: rgba(33,37,41);
+        box-shadow: 0 0 4px 0 rgba(255, 255, 255, .5);
+        padding: 8px 16px 8px 8px;
+        position: absolute;
+        right: calc(2em - 8px);
+        top: 4em;
+    }
+
+    nav li {
+        margin-bottom: .5em;
+        text-align: center;
+        width: 100%;
+    }
+
+    nav li:last-child {
+        margin-bottom: 0;
+    }
+
+    nav li a {
+        font-size: 1.5em;
+        width: 100%;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    nav label[for="hamburger-menu"] {
+        display: none;
+    }
+
+    nav ul {
+        display: block;
+        margin-bottom: 0;
+        margin-right: 1em;
+    }
+
+    nav li {
+        display: inline-block;
+        margin: 1.6em .25em;
+    }
+}
+
+
+/* --- Flashed messages --- */
+
+.flashed_message {
+    margin-bottom: 2em;
+}
+
+
+/* --- Wizard textbox/image --- */
+
+.wizard_image {
+    float: right;
+    max-width: 100%;
+    padding-right: 4em;
+}
+
+.wizard_buttons {
+    float: left;
+    margin-bottom: 1em;
+}
+
+.wizard_container {
+    overflow: hidden;
+}
+
+.wizard_prompt {
+    color: #f7d51d;
+}
+
+
+/* --- upload page --- */
+
+.upload {
+    display: none;
+}
+
+.upload_label {
+    display: block;
+    max-width: 164px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+/* --- review submission page --- */
+
+.image_preview {
+    height: fit-content;
+    max-height: 250px;
+    width: 376px;
+    max-width: calc(100% - 380px);
+    float: left;
+    text-align: center;
+}
+
+.image_preview img {
+    max-height: 100%;
+    max-width: 100%;
+}

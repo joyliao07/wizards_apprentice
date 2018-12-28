@@ -1,21 +1,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="feedback">
     {% if adjective == True and noun == True %}
-      <h3 class="">You got it!</h3>
+      <div class="{% include 'partials/wizard_text.html' %}">
+        <p>Yes, that's a <span class="wizard_prompt">{{ prompt.adjective }} {{ prompt.noun }}</span>! Thank you, my apprentice. I always appreciate your help.</p>
+      </div>
+      <div class="wizard_buttons">
+          <a href="{{ url_for('.play') }}" class="nes-btn is-primary">Help Again</a>
+      </div>
+      {% include 'partials/wizard_happy.html' %}
+
     {% elif adjective == False and noun == True %}
-      <h3 class="">That looks like a {{ prompt.noun }}, but it's not {{ prompt.adjective }}. Try again!</h3>
+      <div class="{% include 'partials/wizard_text.html' %}">
+        <p>That looks like a <span class="wizard_prompt">{{ prompt.noun }}</span>, but it's not <span class="wizard_prompt">{{ prompt.adjective }}</span>. Try again!</p>
+      </div>
+      {% include 'partials/wizard_neutral.html' %}
+      <div class="wizard_buttons">
+          <a href="{{ url_for('.play') }}" class="nes-btn is-primary">Try Again</a>
+      </div>
+
     {% elif adjective == True and noun == False %}
-      <h3 class="">Well... it's {{ prompt.adjective }}, but it's not even a {{ prompt.noun }}. Try again!</h3>
+      <div class="{% include 'partials/wizard_text.html' %}">
+        <p>Well... it's <span class="wizard_prompt">{{ prompt.adjective }}</span>, but it's not even a <span class="wizard_prompt">{{ prompt.noun }}</span>. Try again!</p>
+      </div>
+      {% include 'partials/wizard_neutral.html' %}
+      <div class="wizard_buttons">
+          <a href="{{ url_for('.play') }}" class="nes-btn is-primary">Try Again</a>
+      </div>
+
     {% else %}
-      <h3 class="">This is not a {{ prompt.noun }}. It's not even {{ prompt.adjective }}! Are you trying to deceive me? To the dungeon with you!</h3>
+      <div class="{% include 'partials/wizard_text.html' %}">
+        <p>This is not a <span class="wizard_prompt">{{ prompt.noun }}</span>. It's not even <span class="wizard_prompt">{{ prompt.adjective }}</span>! Are you trying to deceive me? To the dungeon with you!</p>
+      </div>
+      {% include 'partials/wizard_angry.html' %}
+      <div class="wizard_buttons">
+          <a href="{{ url_for('.play') }}" class="nes-btn is-primary">Try Again</a>
+      </div>
+
     {% endif %}
-  </div>
-  <div class="img-wizard">
-    <!-- Wizard's picture here -->
-  </div>
-  <div class="">
-    <button type="button"><a href="{{ url_for(".play") }}"> Try Again </a></button>
   </div>
 {% endblock content %}
