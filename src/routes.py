@@ -3,7 +3,7 @@ from os.path import splitext
 from os.path import join as path_join
 from os import remove as remove_file
 
-from flask import Flask, request, render_template, redirect, url_for, session, abort, flash, session
+from flask import Flask, request, render_template, redirect, url_for, session, abort, flash, session, g
 from sqlalchemy.exc import IntegrityError
 
 from werkzeug.utils import secure_filename
@@ -136,7 +136,24 @@ def history():
     """
     get: user views their own history
     """
-    return render_template('history.html')
+    user = g.user.id
+    all = Submission.query.filter(Submission.submitted_by == user).order_by(Submission.submission_time.desc()).all()
+
+    history = []
+
+    for what in all:
+        user = Account.query.filter(Account.id == what.submitted_by).first()
+        prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
+
+        history.append({
+            'time': str(what.submission_time)[:19],
+            'image': what.image_path,
+            'adjective': prompt.adjective,
+            'noun': prompt.noun,
+            'result': 'Pass' if what.passes_prompt is True else 'Fail'
+        })
+
+    return render_template('history.html', history=history)
 
 
 @app.route('/players')
