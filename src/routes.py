@@ -41,6 +41,11 @@ def play():
     form = SubmitForm()
 
     prompt = Prompt.query.order_by(Prompt.id.desc()).first()
+    print(prompt)
+
+    if prompt is None:
+        random_generator()
+        prompt = Prompt.query.order_by(Prompt.id.desc()).first()
 
     if form.validate_on_submit():
         allowed_filetypes = set(['.png', '.jpg', '.jpeg'])
