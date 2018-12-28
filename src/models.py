@@ -24,7 +24,7 @@ class Submission(db.Model):
     submitted_by = db.Column(db.Integer, db.ForeignKey('accounts.id'))
     passes_prompt = db.Column(db.Boolean)
 
-    submission_time = db.Column(db.DateTime, default=dt.now())
+    submission_time = db.Column(db.DateTime, default=dt.now)
 
     def __repr__(self):
         return f'<Submission for prompt {self.prompt_id} by user>'
