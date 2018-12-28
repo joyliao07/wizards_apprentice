@@ -10,7 +10,10 @@ from werkzeug.utils import secure_filename
 
 from .auth import login_required, logout_required
 from .forms import SubmitForm
-from .models import db, Submission
+from .models import db, Submission, Prompt
+from .gvision import ProcessedImage
+from .submissions import evaluate_submission
+from .prompt import random_generator
 
 from . import app
 
@@ -30,7 +33,14 @@ def play():
     get: visiting page to submit photo
     post: receiving submission form from user
     """
+
+    if session.get('recent_image_path'):
+        del session['recent_image_path']
+        del session['recent_submission_id']
+
     form = SubmitForm()
+
+    prompt = Prompt.query.order_by(Prompt.id.desc()).first()
 
     if form.validate_on_submit():
         allowed_filetypes = set(['.png', '.jpg', '.jpeg'])
@@ -49,7 +59,7 @@ def play():
         try:
             submission = Submission(
                 image_path=filename,
-                prompt_id=1,
+                prompt_id=prompt.id,
                 submitted_by=session.get('account_id'),
                 passes_prompt=False
             )
@@ -58,6 +68,7 @@ def play():
             db.session.commit()
 
             session['recent_image_path'] = filename
+            session['recent_submission_id'] = submission.id
             return redirect(url_for('.submission'))
 
         except IntegrityError as e:
@@ -66,8 +77,7 @@ def play():
             flash('There was an error uploading your submission')
             return redirect(url_for('.submission'))
 
-
-    return render_template('play.html', form=form)
+    return render_template('play.html', form=form, prompt=prompt)
 
 
 @app.route('/submission', methods=['GET', 'POST'])
@@ -78,8 +88,11 @@ def submission():
     post: user confirms submission for evaluation
     """
     if session.get('recent_image_path'):
+        prompt = Prompt.query.order_by(Prompt.id.desc()).first()
+
         image_path = session.get('recent_image_path')
-        return render_template('submission.html', image_path=image_path)
+
+        return render_template('submission.html', image_path=image_path, prompt=prompt)
 
     abort(404)
 
@@ -90,7 +103,28 @@ def feedback():
     """
     get: user sees whether submission passed/failed
     """
-    return render_template('feedback.html')
+
+    if session.get('recent_image_path'):
+        submission_id = session.get('recent_submission_id')
+        prompt = Prompt.query.order_by(Prompt.id.desc()).first()
+        image_path = session.get('recent_image_path')
+
+        image = ProcessedImage(path_join(app.root_path, app.config['UPLOAD_FOLDER'], image_path))
+        status = evaluate_submission(image, (prompt.adjective, prompt.noun))
+
+        if status[0] is True and status[1] is True:
+            submission = Submission.query.filter(Submission.id == submission_id)
+            submission.passes_prompt = True
+            db.session.commit()
+
+            random_generator()
+
+        del session['recent_image_path']
+        del session['recent_submission_id']
+
+        return render_template('feedback.html', adjective=status[0], noun=status[1], prompt=prompt)
+
+    abort(404)
 
 
 @app.route('/history')
