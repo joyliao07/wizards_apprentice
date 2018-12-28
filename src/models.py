@@ -58,7 +58,7 @@ class Account(db.Model):
 
     submissions = db.relationship('Submission', backref='accounts')
 
-    date_created = db.Column(db.DateTime, default=dt.now())
+    date_created = db.Column(db.DateTime, default=dt.now)
 
     def __repr__(self):
         return f'<Account email: {self.email}, username: {self.username}>'
