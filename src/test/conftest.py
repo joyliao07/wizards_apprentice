@@ -4,9 +4,19 @@ import pytest
 
 @pytest.fixture
 def green_car():
-    return ProcessedImage('./src/static/uploads/green_car.jpg')
+    return ProcessedImage('../../uploads/green_car.jpg')
 
 
 @pytest.fixture
 def red_chair():
-    return ProcessedImage('./src/static/uploads/red_chair.jpg')
+    return ProcessedImage('../../uploads/red_chair.jpg')
+
+
+@pytest.fixture
+def black_laptop():
+    return ProcessedImage('../../uploads/laptop.jpg')
+
+
+@pytest.fixture
+def red_teapot():
+    return ProcessedImage('../../uploads/red_teapot.jpg')
