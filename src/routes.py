@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 
 from .auth import login_required, logout_required
 from .forms import SubmitForm
-from .models import db, Submission, Prompt
+from .models import db, Submission, Prompt, Account
 from .gvision import ProcessedImage
 from .submissions import evaluate_submission
 from .prompt import random_generator
@@ -145,4 +145,21 @@ def players():
     """
     get: user views others' history
     """
-    return render_template('players.html')
+
+    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(5)
+
+    compiled = []
+
+    for what in top_5:
+        user = Account.query.filter(Account.id == what.submitted_by).first()
+        prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
+
+        compiled.append({
+            'time': str(what.submission_time)[:19],
+            'user': user.username,
+            'image': what.image_path,
+            'adjective': prompt.adjective,
+            'noun': prompt.noun
+            })
+
+    return render_template('players.html', compiled=compiled)
