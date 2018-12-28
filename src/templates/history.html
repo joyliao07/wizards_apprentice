@@ -3,12 +3,18 @@
 {% block content %}
   <div class="history">
     <ul>
-    <li>This Week: </li>
-    <li>All Time: </li>
-    <li>Today: </li>
+    <li>Today's Score: {{ today_count }}</li>
+    <li>This Week's Score: {{ week_count }}</li>
+    <li>All Time Score: {{ all_time_count }}</li>
     </ul>
   </div>
   <div class="">
-    <!-- List user's pictures in the database -->
+    {% for what in history %}
+      <p> Time: {{ what.time }} </p>
+      <p> Prompt: {{ what.adjective.title() }} {{ what.noun.title() }}</p>
+      <p> Result: {{ what.result }}</p>
+      <img src="uploads/{{ what.image }}" alt="">
+
+    {% endfor %}
   </div>
 {% endblock content %}
