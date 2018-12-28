@@ -8,6 +8,14 @@ header p {
     margin-bottom: 0;
 }
 
+header p a {
+    color: #f7d51d;
+}
+
+header p a:hover {
+    color: #f2c409;
+}
+
 
 /* --- header - nav --- */
 
@@ -25,7 +33,13 @@ nav input:checked ~ ul {
 }
 
 nav li a {
+    color: whitesmoke;
     font-size: 1.25em;
+}
+
+nav li a:active,
+nav li a:hover {
+    color: rgb(197, 197, 197);
 }
 
 @media (max-width: 1023px) {
@@ -42,8 +56,8 @@ nav li a {
     }
 
     nav ul {
-        background-color: white;
-        box-shadow: 0 0 2px 2px rgba(0, 0, 0, .3);
+        background-color: rgba(33,37,41);
+        box-shadow: 0 0 4px 0 rgba(255, 255, 255, .5);
         padding: 8px 16px 8px 8px;
         position: absolute;
         right: calc(2em - 8px);
@@ -109,6 +123,9 @@ nav li a {
     overflow: hidden;
 }
 
+.wizard_prompt {
+    color: #f7d51d;
+}
 
 
 /* --- upload page --- */

@@ -23,6 +23,15 @@ h1 {
     font-size: 3em;
 }
 
+a {
+    color: #429dff;
+}
+
+a:hover,
+a:active {
+    color: #6db4ff;
+}
+
 a,
 a:hover,
 a:active {

@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="{% include 'partials/wizard_text.html' %}">
-    <p>So, is this what a {{ prompt.adjective }} {{ prompt.noun }} looks like.</p>
+    <p>So, is this what a <span class="wizard_prompt">{{ prompt.adjective }} {{ prompt.noun }}</span> looks like.</p>
   </div>
   <div class="wizard_buttons">
     <a href="{{ url_for('.feedback') }}" class="nes-btn is-primary"> Yes, submit! </a>
