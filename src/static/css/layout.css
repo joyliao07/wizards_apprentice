@@ -1,0 +1,52 @@
+/* --- body -- */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* --- header --- */
+
+header {
+    background-color: #212529;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+
+/* --- main --- */
+
+main {
+    flex: 1 0 auto;
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 1em;
+    width: 100%;
+}
+
+.nes-container {
+    width: 100%;
+}
+
+.nes-container.with-title {
+    margin-bottom: 2em;
+}
+
+.nes-container:before {
+    background-color: white;
+}
+
+
+/* --- footer --- */
+
+footer {
+    background-color: #212529;
+    color: whitesmoke;
+    flex-shrink: 0;
+    padding: 1em;
+}
