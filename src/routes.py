@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 
 from .auth import login_required, logout_required
 from .forms import SubmitForm
-from .models import db, Submission, Prompt
+from .models import db, Submission, Prompt, Account
 from .gvision import ProcessedImage
 from .submissions import evaluate_submission
 from .prompt import random_generator
@@ -41,7 +41,6 @@ def play():
     form = SubmitForm()
 
     prompt = Prompt.query.order_by(Prompt.id.desc()).first()
-    print(prompt)
 
     if prompt is None:
         random_generator()
@@ -76,9 +75,8 @@ def play():
             session['recent_submission_id'] = submission.id
             return redirect(url_for('.submission'))
 
-        except IntegrityError as e:
+        except IntegrityError:
             remove_file(file_path)
-            flash(str(e))
             flash('There was an error uploading your submission')
             return redirect(url_for('.submission'))
 
@@ -118,7 +116,7 @@ def feedback():
         status = evaluate_submission(image, (prompt.adjective, prompt.noun))
 
         if status[0] is True and status[1] is True:
-            submission = Submission.query.filter(Submission.id == submission_id)
+            submission = Submission.query.filter(Submission.id == submission_id).first()
             submission.passes_prompt = True
             db.session.commit()
 
@@ -147,4 +145,21 @@ def players():
     """
     get: user views others' history
     """
-    return render_template('players.html')
+
+    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(5)
+
+    compiled = []
+
+    for what in top_5:
+        user = Account.query.filter(Account.id == what.submitted_by).first()
+        prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
+
+        compiled.append({
+            'time': str(what.submission_time)[:19],
+            'user': user.username,
+            'image': what.image_path,
+            'adjective': prompt.adjective,
+            'noun': prompt.noun
+            })
+
+    return render_template('players.html', compiled=compiled)
