@@ -5,6 +5,23 @@
     <h2>Today's photos:</h2>
   </div>
   <div class="">
-    <!-- List today's pictures in the database -->
+    <!-- List time of the pictures -->
+    {% for what in top_3 %}
+      <p> Time: {{ what.submission_time }} </p>
+    {% endfor %}
   </div>
+
+  <div class="">
+    <!-- List path of the pictures -->
+    {% for what in top_3 %}
+      <p> Path: {{ what.image_path }} </p>
+      <img src="uploads/{{ what.image_path }}" alt="">
+    {% endfor %}
+  </div>
+
+
+
+
 {% endblock content %}
+
+

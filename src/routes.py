@@ -145,4 +145,6 @@ def players():
     """
     get: user views others' history
     """
-    return render_template('players.html')
+    top_3 = Submission.query.order_by(Submission.submission_time.desc()).limit(3)
+
+    return render_template('players.html', top_3=top_3)
