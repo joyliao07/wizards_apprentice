@@ -2,9 +2,22 @@
 
 {% block content %}
   <div class="players">
-    <h2>Today's photos:</h2>
+    <h2>Most Recent 3 Wins:</h2>
   </div>
+
   <div class="">
-    <!-- List today's pictures in the database -->
+    <!-- List path of the pictures -->
+    {% for what in compiled %}
+      <p> Time: {{ what.time }} </p>
+      <p> Player: {{ what.user.title() }} </p>
+      <p> Prompt: {{ what.adjective.title() }} {{ what.noun.title() }}</p>
+      <img src="uploads/{{ what.image }}" alt="">
+    {% endfor %}
   </div>
+
+
+
+
 {% endblock content %}
+
+
