@@ -16,6 +16,13 @@ header p a:hover {
     color: #f2c409;
 }
 
+@media (max-width: 899px) {
+    header p {
+        font-size: 1.5em;
+        padding: 1em;
+    }
+}
+
 
 /* --- header - nav --- */
 
@@ -145,16 +152,23 @@ nav li a:hover {
 
 /* --- review submission page --- */
 
-.image_preview {
-    height: fit-content;
-    max-height: 250px;
-    width: 376px;
-    max-width: calc(100% - 380px);
-    float: left;
-    text-align: center;
-}
-
 .image_preview img {
     max-height: 100%;
     max-width: 100%;
+}
+
+.image_preview {
+    clear: both;
+    text-align: center;
+}
+
+@media (min-width: 900px) {
+    .image_preview {
+        height: fit-content;
+        max-height: 250px;
+        width: 376px;
+        max-width: calc(100% - 380px);
+        float: left;
+        text-align: center;
+    }
 }

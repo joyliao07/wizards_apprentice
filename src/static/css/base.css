@@ -23,13 +23,19 @@ h1 {
     font-size: 3em;
 }
 
+@media (max-width: 899px) {
+    h1 {
+        font-size: 2em;
+    }
+}
+
 a {
     color: #429dff;
 }
 
 a:hover,
 a:active {
-    color: #6db4ff;
+    color: #1f8bff;
 }
 
 a,
@@ -39,13 +45,19 @@ a:active {
     text-decoration: none;
 }
 
+@media (max-width: 899x) {
+    main .nes-container p {
+        font-size: 16px;
+    }
+}
+
 
 /* --- other elements --- */
 
-img {
-    max-width: 300px;
-}
-
 .nes-input {
     margin-bottom: 2em;
+}
+
+img {
+    max-width: 100%;
 }
