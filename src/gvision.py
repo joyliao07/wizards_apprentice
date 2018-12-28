@@ -1,17 +1,24 @@
 import io
-import os
-import uuid
 from google.cloud import vision
 from google.cloud.vision import types
 
 
 class ProcessedImage(object):
+    """Model for images processed through the Google Vision API. Image files get
+    label annotations and image property attributes that retain all of the
+    data from the API. They keywords and colors attributes are a subset of the
+    data scoped to the properties that we are most interested in.
+
+    """
+
     def __init__(self, source):
-        self.source = source
+        """
+        input: source (string) path to the image file
+        """
+        self.filename = source
         self.labels = self.get_labels()
         self.keywords = self.get_keywords()
         self.image_properties = self.get_image_properties()
-        self.filename = self.randomize_source_filename()
         self.colors = self.get_colors()
 
     def get_labels(self):
@@ -22,7 +29,7 @@ class ProcessedImage(object):
         """
         client = vision.ImageAnnotatorClient()
         try:
-            with io.open(self.source, 'rb') as image_file:
+            with io.open(self.filename, 'rb') as image_file:
                 content = image_file.read()
             image = types.Image(content=content)
             response = client.label_detection(image=image)
@@ -44,7 +51,7 @@ class ProcessedImage(object):
         """
         client = vision.ImageAnnotatorClient()
         try:
-            with io.open(self.source, 'rb') as image_file:
+            with io.open(self.filename, 'rb') as image_file:
                 content = image_file.read()
             image = types.Image(content=content)
             response = client.image_properties(image=image)
@@ -53,15 +60,6 @@ class ProcessedImage(object):
             print('The image file was not found.')
         if properties:
             return properties
-
-    def randomize_source_filename(self):
-        """Generate randomized filename for stored images.
-
-        return: randomized string
-        """
-        ext = self.source.split('.')[-1]
-        # TODO: rename source file
-        return f'{ uuid.uuid4() }.{ ext }'
 
     def get_colors(self):
         """Extract color data from image_properties.
