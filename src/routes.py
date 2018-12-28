@@ -195,9 +195,12 @@ def players():
         user = Account.query.filter(Account.id == what.submitted_by).first()
         prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
 
+        score = Submission.query.filter(Submission.submitted_by == what.submitted_by).filter(Submission.passes_prompt == True).count()
+
         compiled.append({
             'time': str(what.submission_time)[:19],
             'user': user.username,
+            'score': score,
             'image': what.image_path,
             'adjective': prompt.adjective,
             'noun': prompt.noun
