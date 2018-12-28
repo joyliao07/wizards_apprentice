@@ -1,16 +1,23 @@
-import random
+from random import choice as randchoice
+
+from .models import db, Prompt
+from sqlalchemy.exc import IntegrityError
 
 
-colors = ['red', 'green', 'blue']
-nouns = ['pipe', 'fruit', 'table', 'chair', 'car', 'ball', 'door', 'button', 'mug', 'pen', 'bike']
+adjectives = ['red', 'green', 'blue']
+nouns = ['fruit', 'table', 'chair', 'car', 'ball', 'door', 'laptop', 'mug', 'pen', 'bicycle']
 
 
-def random_generator(colors, nouns):
+def random_generator():
     """To generate random pairs of colors and nouns."""
-    ran_noun = (random.randint(0, len(nouns)-1))
-    ran_color = (random.randint(0, len(colors)-1))
-    print(colors[ran_color], nouns[ran_noun])
-    return(colors[ran_color], nouns[ran_noun])
+    ran_adjective = randchoice(adjectives)
+    ran_noun = randchoice(nouns)
 
+    try:
+        prompt = Prompt(adjective=ran_adjective, noun=ran_noun)
+        db.session.add(prompt)
+        db.session.commit()
+        return True
 
-random_generator(colors, nouns)
+    except IntegrityError:
+        return False

@@ -2,13 +2,13 @@
 
 {% block content %}
   <div class="submission">
-    <h3 class="">Your Picture: </h3>
+    <h3 class="">So, is this what a {{ prompt.adjective }} {{ prompt.noun }} looks like?</h3>
   </div>
   <div class="uploaded">
     <img src="uploads/{{ image_path }}" alt="">
   </div>
   <div class="">
-    <button type="button"><a href="{{ url_for(".feedback") }}"> Submit </a></button>
-    <button type="button"><a href="{{ url_for(".play") }}"> Reload </a></button>
+    <button type="button"><a href="{{ url_for(".feedback") }}"> Yes, submit! </a></button>
+    <button type="button"><a href="{{ url_for(".play") }}"> No, try again </a></button>
   </div>
 {% endblock content %}
