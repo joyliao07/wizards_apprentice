@@ -42,7 +42,7 @@ class Prompt(db.Model):
     noun = db.Column(db.String(128))        # The thing to find
 
     def __repr__(self):
-        return f'<Prompt "{self.prompt_words}">'
+        return f'<Prompt adjective: {self.adjective} noun: {self.noun}>'
 
 
 class Account(db.Model):
