@@ -1,0 +1,37 @@
+/* --- add fonts --- */
+
+@font-face {
+    font-family: 'LB';
+    src: url('../font/8bitlim.ttf')
+}
+
+
+/* --- body/html styles --- */
+
+
+body {
+    font-family: 'Source Code Pro';
+    font-size: 20px;
+}
+
+
+/* --- text --- */
+
+h1 {
+    font-family: LB;
+    font-size: 3em;
+}
+
+a,
+a:hover,
+a:active {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+
+/* --- other elements --- */
+
+img {
+    max-width: 300px;
+}

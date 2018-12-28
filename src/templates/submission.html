@@ -1,14 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="submission">
-    <h3 class="">So, is this what a {{ prompt.adjective }} {{ prompt.noun }} looks like?</h3>
+  <div class="{% include 'partials/wizard_text.html' %}">
+    <p>So, is this what a {{ prompt.adjective }} {{ prompt.noun }} looks like.</p>
   </div>
-  <div class="uploaded">
-    <img src="uploads/{{ image_path }}" alt="">
+  <div class="wizard_buttons">
+    <a href="{{ url_for('.feedback') }}" class="nes-btn is-primary"> Yes, submit! </a>
+    <a href="{{ url_for('.play') }}" class="nes-btn"> No, try again </a>
   </div>
-  <div class="">
-    <button type="button"><a href="{{ url_for(".feedback") }}"> Yes, submit! </a></button>
-    <button type="button"><a href="{{ url_for(".play") }}"> No, try again </a></button>
+  {% include 'partials/wizard_neutral.html' %}
+
+  <div class="nes-container image_preview">
+    <img src="uploads/{{ image_path }}" alt="User uploaded image">
   </div>
+
+
 {% endblock content %}

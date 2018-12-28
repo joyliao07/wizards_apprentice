@@ -8,7 +8,7 @@ from wtforms.validators import DataRequired, length
 
 
 class SubmitForm(FlaskForm):
-    file_upload = FileField('Upload File', validators=[FileRequired()])
+    file_upload = FileField('<span class="upload_label">Upload File</span>', validators=[FileRequired()])
 
 
 class AuthForm(FlaskForm):
