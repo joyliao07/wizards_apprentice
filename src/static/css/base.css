@@ -10,6 +10,7 @@
 
 
 body {
+    background-color: whitesmoke;
     font-family: 'Source Code Pro';
     font-size: 20px;
 }
@@ -34,4 +35,8 @@ a:active {
 
 img {
     max-width: 300px;
+}
+
+.nes-input {
+    margin-bottom: 2em;
 }

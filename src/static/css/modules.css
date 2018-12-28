@@ -85,6 +85,13 @@ nav li a {
 }
 
 
+/* --- Flashed messages --- */
+
+.flashed_message {
+    margin-bottom: 2em;
+}
+
+
 /* --- Wizard textbox/image --- */
 
 .wizard_image {
@@ -112,10 +119,14 @@ nav li a {
 
 .upload_label {
     display: block;
-    max-width: 10em;
+    max-width: 164px;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 }
+
+
+/* --- review submission page --- */
 
 .image_preview {
     height: fit-content;

@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="register">
-  <h2>Register:</h2>
   <form action="{{ url_for(".register") }}" method="POST">
     {{ form.csrf_token }}
-    {{ form.username.label }}{{ form.username(size=16) }}
-    {{ form.email.label }}{{ form.email(size=128) }}
-    {{ form.password.label }}{{ form.password(size=32) }}
-    <input type="submit" name="register_form" value="Go">
+    {{ form.username.label }}{{ form.username(class_="nes-input") }}
+    {{ form.email.label }}{{ form.email(class_="nes-input") }}
+    {{ form.password.label }}{{ form.password(class_="nes-input") }}
+    <button type="submit" class="nes-btn is-primary">Register</button>
   </form>
-</div>
 {% endblock content %}

@@ -1,7 +1,7 @@
 var inputs = document.querySelectorAll( '.upload' );
 Array.prototype.forEach.call( inputs, function( input )
 {
-	var label	 = input.nextElementSibling,
+	var label	 = input.nextElementSibling.firstChild,
 		labelVal = label.innerHTML;
 
 	input.addEventListener( 'change', function( e )
@@ -13,8 +13,8 @@ Array.prototype.forEach.call( inputs, function( input )
 			fileName = e.target.value.split( '\\' ).pop();
 
 		if( fileName )
-			label.innerHTML = fileName;
+			label.innerHTML = '<i class="fas fa-upload"></i> ' + fileName;
 		else
-			label.innerHTML = labelVal;
+			label.innerHTML = '<i class="fas fa-upload"></i> ' + labelVal;
 	});
 });
