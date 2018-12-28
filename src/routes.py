@@ -41,7 +41,6 @@ def play():
     form = SubmitForm()
 
     prompt = Prompt.query.order_by(Prompt.id.desc()).first()
-    print(prompt)
 
     if prompt is None:
         random_generator()
@@ -76,9 +75,8 @@ def play():
             session['recent_submission_id'] = submission.id
             return redirect(url_for('.submission'))
 
-        except IntegrityError as e:
+        except IntegrityError:
             remove_file(file_path)
-            flash(str(e))
             flash('There was an error uploading your submission')
             return redirect(url_for('.submission'))
 
@@ -118,7 +116,7 @@ def feedback():
         status = evaluate_submission(image, (prompt.adjective, prompt.noun))
 
         if status[0] is True and status[1] is True:
-            submission = Submission.query.filter(Submission.id == submission_id)
+            submission = Submission.query.filter(Submission.id == submission_id).first()
             submission.passes_prompt = True
             db.session.commit()
 
