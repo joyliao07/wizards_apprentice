@@ -146,11 +146,11 @@ def players():
     get: user views others' history
     """
 
-    top_3 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(3)
+    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(5)
 
     compiled = []
 
-    for what in top_3:
+    for what in top_5:
         user = Account.query.filter(Account.id == what.submitted_by).first()
         prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
 
