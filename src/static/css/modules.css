@@ -108,7 +108,7 @@ nav li a:hover {
 
 /* --- Flashed messages --- */
 
-.flashed_message {
+.nes-container {
     margin-bottom: 2em;
 }
 
