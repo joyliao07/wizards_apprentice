@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 
-{% block content %}
-  <div class="history">
-    <ul>
-    <li>Today's Score: {{ today_count }}</li>
-    <li>This Week's Score: {{ week_count }}</li>
-    <li>All Time Score: {{ all_time_count }}</li>
-    </ul>
-  </div>
-  <div class="">
-    {% for what in history %}
-      <p> Time: {{ what.time }} </p>
-      <p> Prompt: {{ what.adjective.title() }} {{ what.noun.title() }}</p>
-      <p> Result: {{ what.result }}</p>
-      <img src="uploads/{{ what.image }}" alt="">
+{% block title %}All Players{% endblock %}
 
+{% block content %}
+  <div class="players">
+    <h2>Most Recent 5 Wins:</h2>
+  </div>
+
+  <div class="">
+    <!-- List path of the pictures -->
+    {% for what in compiled %}
+      <p> Time: {{ what.time }} </p>
+      <p> Player: {{ what.user.title() }} ({{ what.score}})</p>
+      <p> Prompt: {{ what.adjective.title() }} {{ what.noun.title() }}</p>
+      <img src="uploads/{{ what.image }}" alt="">
     {% endfor %}
   </div>
+
 {% endblock content %}
+
+
