@@ -157,9 +157,11 @@ nav li a:hover {
     max-width: 100%;
 }
 
-.image_preview {
-    clear: both;
-    text-align: center;
+@media (max-width: 899px) {
+    .image_preview {
+        clear: both;
+        text-align: center;
+    }
 }
 
 @media (min-width: 900px) {
