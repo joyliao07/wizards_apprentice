@@ -3,20 +3,31 @@
 {% block title %}My history{% endblock %}
 
 {% block content %}
-  <div class="history">
-    <ul>
-    <li>Today's Score: {{ today_count }}</li>
-    <li>This Week's Score: {{ week_count }}</li>
-    <li>All Time Score: {{ all_time_count }}</li>
-    </ul>
+  <div class="{% include 'partials/wizard_text.html' %}">
+    <p>Your past submissions are below. Thank you for your help, my apprentice.</p>
   </div>
-  <div class="">
-    {% for what in history %}
-      <p> Time: {{ what.time }} </p>
-      <p> Prompt: {{ what.adjective.title() }} {{ what.noun.title() }}</p>
-      <p> Result: {{ what.result }}</p>
-      <img src="uploads/{{ what.image }}" alt="">
+  {% include 'partials/wizard_neutral.html' %}
 
-    {% endfor %}
-  </div>
+  <table class="nes-table nes-table-responsive is-bordered is-centered is-dark">
+    <thead>
+      <th>Today</th>
+      <th>This week</th>
+      <th>All time</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ today_count }}</td>
+        <td>{{ week_count }}</td>
+        <td>{{ all_time_count }}</td>
+      </tr>
+    </tbody>
+  </table>
+  {% for what in history %}
+    <div class="nes-container is-dark history-image">
+      <p>{{ what.adjective.title() }} {{ what.noun.title() }} ({{ what.result }})</p>
+      <img src="uploads/{{ what.image }}" alt="User's image for {{ what.adjective.title() }} {{ what.noun.title() }}">
+      <p class="player-username">By: {{ g.user.username }}</p>
+      <p class="submitted-date">{{ what.time }}</p>
+    </div>
+  {% endfor %}
 {% endblock content %}

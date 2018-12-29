@@ -168,7 +168,7 @@ def history():
         prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
 
         history.append({
-            'time': str(what.submission_time)[:19],
+            'time': str(what.submission_time)[:16] + ' UTC',
             'image': what.image_path,
             'adjective': prompt.adjective,
             'noun': prompt.noun,
@@ -185,7 +185,7 @@ def players():
     get: user views others' history
     """
 
-    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(5)
+    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(15)
 
     compiled = []
 
@@ -196,7 +196,7 @@ def players():
         score = Submission.query.filter(Submission.submitted_by == what.submitted_by).filter(Submission.passes_prompt == True).count()
 
         compiled.append({
-            'time': str(what.submission_time)[:19],
+            'time': str(what.submission_time)[:16] + ' UTC',
             'user': user.username,
             'score': score,
             'image': what.image_path,
