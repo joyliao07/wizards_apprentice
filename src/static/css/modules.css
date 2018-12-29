@@ -174,3 +174,39 @@ nav li a:hover {
         text-align: center;
     }
 }
+
+
+/* --- history page --- */
+
+.nes-table.is-bordered {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    width: calc(100% - 8px);
+}
+
+.nes-table.is-bordered th,
+.nes-table.is-bordered td {
+    padding: .5em 0;
+    text-align: center;
+}
+
+.history-image {
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+.history-image img {
+    max-height: 500px;
+    display: block;
+    margin: 1em auto;
+}
+
+@media (min-width: 900px) {
+    .player-username {
+        float: left;
+    }
+
+    .submitted-date {
+        float: right;
+    }
+}
