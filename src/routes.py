@@ -140,7 +140,6 @@ def history():
     """
     user = g.user.id
     all = Submission.query.filter(Submission.submitted_by == user).order_by(Submission.submission_time.desc()).all()
-    import pdb; pdb.set_trace()
 
     # To get the number of submission all time:
     all_time_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).count()
