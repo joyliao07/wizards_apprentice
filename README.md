@@ -56,4 +56,4 @@ Flask, PostgreSQL. Deployed on EC2 (Ubuntu 18.04) running Nginx and Gunicorn
 01-02-2019    11:00:00    Time conversions from UTC to PDT working  
 01-02-2019    12:00:00    Color detection improved  
 01-02-2019    13:30:00    Testing on auth routes complete  
-
+01-02-2019    16:00:00    Admin page added    
