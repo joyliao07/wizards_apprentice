@@ -64,15 +64,14 @@ def play():
         f.save(file_path)
 
         try:
-            my_date = datetime.now()
-            time_minus = datetime.now() + timedelta(hours=-8)
+            time_pacific = datetime.now() + timedelta(hours=-8)
 
             submission = Submission(
                 image_path=filename,
                 prompt_id=prompt.id,
                 submitted_by=session.get('account_id'),
                 passes_prompt=False,
-                submission_time=time_minus
+                submission_time=time_pacific
             )
 
             db.session.add(submission)
