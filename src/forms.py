@@ -1,7 +1,7 @@
 from flask import session
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
+from wtforms import StringField, PasswordField, SelectField
 from flask_wtf.file import FileField, FileRequired
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired, length
@@ -20,3 +20,8 @@ class RegisterForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), length(max=16)])
     email = EmailField('E-mail', validators=[DataRequired(), length(max=128)])
     password = PasswordField('Password', validators=[DataRequired(), length(max=32)])
+
+
+class ManualPromptForm(FlaskForm):
+    adjective = StringField('Adjective', validators=[DataRequired()])
+    noun = StringField('Noun', validators=[DataRequired()])
