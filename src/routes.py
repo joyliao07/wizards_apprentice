@@ -64,14 +64,15 @@ def play():
         f.save(file_path)
 
         try:
-            my_date = datetime.now(pytz.timezone('US/Pacific'))
+            my_date = datetime.now()
+            time_minus = datetime.now() + timedelta(hours=-8)
 
             submission = Submission(
                 image_path=filename,
                 prompt_id=prompt.id,
                 submitted_by=session.get('account_id'),
                 passes_prompt=False,
-                submission_time=my_date
+                submission_time=time_minus
             )
 
             db.session.add(submission)
