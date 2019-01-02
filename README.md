@@ -40,12 +40,15 @@ Flask, PostgreSQL. Deployed on EC2 (Ubuntu 18.04) running Nginx and Gunicorn
 
 
 ## Change Log
-12-27-2018  09:00:00    Project Started
-12-27-2018  10:30:00    Flask app set up
-12-27-2018  11:30:00    Google Vision API submissions working
-12-27-2018  12:00:00    User registration/authorization set up
-12-27-2018  12:00:00    Database layer implemented
-12-27-2018  15:00:00    App deployed to AWS
-12-27-2018  15:30:00    Submission evaluations working
-12-27-2018  17:00:00    First tests of front end user experience
-12-28-2018  09:00:00    Begin Day 2
+12-27-2018    09:00:00    Project Started  
+12-27-2018    10:30:00    Flask app set up  
+12-27-2018    11:30:00    Google Vision API submissions working  
+12-27-2018    12:00:00    User registration/authorization set up  
+12-27-2018    12:00:00    Database layer implemented  
+12-27-2018    15:00:00    App deployed to AWS  
+12-27-2018    15:30:00    Submission evaluations working  
+12-27-2018    17:00:00    First tests of front end user experience  
+12-28-2018    09:00:00    Begin Day 2  
+12-28-2018    14:00:00    Improved submission evaluation logic  
+12-28-2018    15:30:00    Player history and all players history complete  
+12-28-2018    16:00:00    Basic styling complete  

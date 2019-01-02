@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Welcome{% endblock title %}
+
 {% block content %}
   {% if g.user %}
     <div class="{% include 'partials/wizard_text.html' %}">

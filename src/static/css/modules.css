@@ -108,7 +108,7 @@ nav li a:hover {
 
 /* --- Flashed messages --- */
 
-.flashed_message {
+.nes-container {
     margin-bottom: 2em;
 }
 
@@ -157,9 +157,11 @@ nav li a:hover {
     max-width: 100%;
 }
 
-.image_preview {
-    clear: both;
-    text-align: center;
+@media (max-width: 899px) {
+    .image_preview {
+        clear: both;
+        text-align: center;
+    }
 }
 
 @media (min-width: 900px) {
@@ -170,5 +172,41 @@ nav li a:hover {
         max-width: calc(100% - 380px);
         float: left;
         text-align: center;
+    }
+}
+
+
+/* --- history page --- */
+
+.nes-table.is-bordered {
+    font-size: 1.5em;
+    margin-bottom: 1em;
+    width: calc(100% - 8px);
+}
+
+.nes-table.is-bordered th,
+.nes-table.is-bordered td {
+    padding: .5em 0;
+    text-align: center;
+}
+
+.history-image {
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+.history-image img {
+    max-height: 500px;
+    display: block;
+    margin: 1em auto;
+}
+
+@media (min-width: 900px) {
+    .player-username {
+        float: left;
+    }
+
+    .submitted-date {
+        float: right;
     }
 }

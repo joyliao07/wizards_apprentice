@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% block title %}Feedback{% endblock %}
+
 {% block content %}
     {% if adjective == True and noun == True %}
       <div class="{% include 'partials/wizard_text.html' %}">

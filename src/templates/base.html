@@ -10,13 +10,13 @@
     {% include 'partials/nav.html' %}
   </header>
   <main>
-    <h1>Wizard</h1>
+    <h1>{% block title %}{% endblock title %}</h1>
     {% for message in get_flashed_messages() %}
       <div class="nes-container flashed_message">{{ message }}</div>
     {% endfor %}
 
     {% block content %}
-    {% endblock content%}
+    {% endblock content %}
   </main>
   <footer>
     copy2018

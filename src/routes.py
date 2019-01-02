@@ -25,7 +25,7 @@ def home():
     """
     get: user visits homepage
     """
-    return render_template('home.html')
+    return render_template('pages/home.html')
 
 
 @app.route('/play', methods=['GET', 'POST'])
@@ -82,7 +82,7 @@ def play():
             flash('There was an error uploading your submission')
             return redirect(url_for('.submission'))
 
-    return render_template('play.html', form=form, prompt=prompt)
+    return render_template('pages/play.html', form=form, prompt=prompt)
 
 
 @app.route('/submission', methods=['GET', 'POST'])
@@ -97,7 +97,7 @@ def submission():
 
         image_path = session.get('recent_image_path')
 
-        return render_template('submission.html', image_path=image_path, prompt=prompt)
+        return render_template('pages/submission.html', image_path=image_path, prompt=prompt)
 
     abort(404)
 
@@ -127,7 +127,7 @@ def feedback():
         del session['recent_image_path']
         del session['recent_submission_id']
 
-        return render_template('feedback.html', adjective=status[0], noun=status[1], prompt=prompt)
+        return render_template('pages/feedback.html', adjective=status[0], noun=status[1], prompt=prompt)
 
     abort(404)
 
@@ -148,16 +148,14 @@ def history():
 
     date = datetime.now().date()
 
-    today_count = Submission.query.filter(Submission.submitted_by == user).filter(
-        Submission.passes_prompt == True).filter(func.date(Submission.submission_time) == date).count()
+    today_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).filter(func.date(Submission.submission_time) == date).count()
 
     # To get the number of submission of the past week:
 
     now = datetime.now()
     week_ago = now - timedelta(days=7)
 
-    week_count = Submission.query.filter(Submission.submitted_by == user).filter(
-        Submission.passes_prompt == True).filter(Submission.submission_time > week_ago).count()
+    week_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).filter(Submission.submission_time > week_ago).count()
 
     # To Pass all submission history:
 
@@ -168,16 +166,14 @@ def history():
         prompt = Prompt.query.filter(Prompt.id == what.prompt_id).first()
 
         history.append({
-            'time': str(what.submission_time)[:19],
+            'time': str(what.submission_time)[:16] + ' UTC',
             'image': what.image_path,
             'adjective': prompt.adjective,
             'noun': prompt.noun,
             'result': 'Pass' if what.passes_prompt is True else 'Fail'
         })
 
-        time = str(what.submission_time)[:10]
-
-    return render_template('history.html', history=history, all_time_count=all_time_count, today_count=today_count, week_count=week_count)
+    return render_template('pages/history.html', history=history, all_time_count=all_time_count, today_count=today_count, week_count=week_count)
 
 
 @app.route('/players')
@@ -187,7 +183,7 @@ def players():
     get: user views others' history
     """
 
-    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(5)
+    top_5 = Submission.query.filter(Submission.passes_prompt == 't').order_by(Submission.submission_time.desc()).limit(15)
 
     compiled = []
 
@@ -198,7 +194,7 @@ def players():
         score = Submission.query.filter(Submission.submitted_by == what.submitted_by).filter(Submission.passes_prompt == True).count()
 
         compiled.append({
-            'time': str(what.submission_time)[:19],
+            'time': str(what.submission_time)[:16] + ' UTC',
             'user': user.username,
             'score': score,
             'image': what.image_path,
@@ -206,4 +202,4 @@ def players():
             'noun': prompt.noun
             })
 
-    return render_template('players.html', compiled=compiled)
+    return render_template('pages/players.html', compiled=compiled)

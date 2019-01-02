@@ -5,7 +5,7 @@ from sqlalchemy.exc import IntegrityError
 
 
 adjectives = ['red', 'green', 'blue']
-nouns = ['fruit', 'table', 'chair', 'car', 'ball', 'door', 'laptop', 'mug', 'pen', 'bicycle']
+nouns = ['fruit', 'table', 'chair', 'sofa', 'car', 'ball', 'door', 'laptop', 'mug', 'bicycle', 'bird', 'backpack', 'mouse', 'book']
 
 
 def random_generator():
