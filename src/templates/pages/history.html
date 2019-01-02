@@ -3,6 +3,7 @@
 {% block title %}My history{% endblock %}
 
 {% block content %}
+{% if history|length > 0 %}
   <div class="{% include 'partials/wizard_text.html' %}">
     <p>Your past submissions are below. Thank you for your help, my apprentice.</p>
   </div>
@@ -30,5 +31,12 @@
       <p class="submitted-date">{{ what.time }}</p>
     </div>
   {% endfor %}
+
+{% else %}
+  <div class="{% include 'partials/wizard_text.html' %}">
+    <p>Apprentice, you have no submissions yet. <a href="/play">Make your first submission</a> to see your submissions here.</p>
+  </div>
+  {% include 'partials/wizard_neutral.html' %}
+{% endif %}
 {% endblock content %}
 
