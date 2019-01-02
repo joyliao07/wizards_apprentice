@@ -1,10 +1,13 @@
-from flask import flash, render_template, redirect, url_for, session, g
+from flask import flash, render_template, redirect, url_for, session, g, abort
 from sqlalchemy.exc import IntegrityError
 
 from . import app
-from .forms import AuthForm, RegisterForm
-from .models import Account, db
+from .forms import AuthForm, RegisterForm, ManualPromptForm
+from .models import Account, Prompt, db
+from .prompt import random_generator
+
 import functools
+import os
 
 
 # --- Helpers
@@ -44,6 +47,9 @@ def load_logged_in_account():
     else:
         g.user = Account.query.get(account_id)
 
+        if session.get('admin') is True:
+            g.admin = True
+
 
 # --- Routes
 
@@ -71,7 +77,13 @@ def login():
         if error is None:
             session.clear()
             session['account_id'] = account.id
+            session['admin'] = False
             flash('You have logged in successfully')
+
+            if account.email == os.getenv('ADMIN_USER'):
+                session['admin'] = True
+                flash('admin login')
+
             return redirect(url_for('.home'))
 
         flash(error)
@@ -129,3 +141,41 @@ def logout():
     session.clear()
     flash('You have been logged out')
     return redirect(url_for('.login'))
+
+
+# --- Admin route
+
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    """
+    get: takes user to admin panel. they must be logged in to admin
+    account
+    post: update based on changes on admin panel
+    """
+    if session.get('admin') is True:
+        form = ManualPromptForm()
+        if form.validate_on_submit():
+            adjective = form.data['adjective']
+            noun = form.data['noun']
+            prompt = Prompt(adjective=adjective, noun=noun)
+            db.session.add(prompt)
+            db.session.commit()
+            flash(f'Prompt updated to { adjective } { noun }')
+
+        return render_template('pages/admin.html', form=form)
+
+    abort(404)
+
+
+@app.route('/admin_new_prompt')
+def admin_new_prompt():
+    """
+    get: resets prompt
+    """
+    if session.get('admin') is True:
+        random_generator()
+        flash('New random prompt generated')
+        return redirect(url_for('.admin'))
+
+    abort(404)
