@@ -1,8 +1,8 @@
-"""initial setup of models
+"""empty message
 
-Revision ID: de18ff7213c1
+Revision ID: 20cd99d2f1d1
 Revises: 
-Create Date: 2018-12-27 10:02:07.892297
+Create Date: 2019-01-02 11:23:57.004454
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'de18ff7213c1'
+revision = '20cd99d2f1d1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -30,18 +30,19 @@ def upgrade():
     op.create_index(op.f('ix_accounts_username'), 'accounts', ['username'], unique=True)
     op.create_table('prompts',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('prompt_words', sa.String(length=128), nullable=True),
+    sa.Column('adjective', sa.String(length=128), nullable=True),
+    sa.Column('noun', sa.String(length=128), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('submissions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('image_path', sa.String(length=256), nullable=False),
     sa.Column('prompt_id', sa.Integer(), nullable=True),
-    sa.Column('account_id', sa.Integer(), nullable=True),
+    sa.Column('submitted_by', sa.Integer(), nullable=True),
     sa.Column('passes_prompt', sa.Boolean(), nullable=True),
     sa.Column('submission_time', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['account_id'], ['accounts.id'], ),
     sa.ForeignKeyConstraint(['prompt_id'], ['prompts.id'], ),
+    sa.ForeignKeyConstraint(['submitted_by'], ['accounts.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_submissions_image_path'), 'submissions', ['image_path'], unique=True)

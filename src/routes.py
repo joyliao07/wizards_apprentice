@@ -67,7 +67,7 @@ def play():
                 image_path=filename,
                 prompt_id=prompt.id,
                 submitted_by=session.get('account_id'),
-                passes_prompt=False
+                passes_prompt=False,
             )
 
             db.session.add(submission)
@@ -140,6 +140,7 @@ def history():
     """
     user = g.user.id
     all = Submission.query.filter(Submission.submitted_by == user).order_by(Submission.submission_time.desc()).all()
+    import pdb; pdb.set_trace()
 
     # To get the number of submission all time:
     all_time_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).count()
