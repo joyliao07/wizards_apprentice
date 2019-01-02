@@ -26,7 +26,7 @@ class Submission(db.Model):
     passes_prompt = db.Column(db.Boolean)
 
     my_date = dt.now(pytz.timezone('US/Pacific'))
-    submission_time = db.Column(db.DateTime, default=my_date)
+    submission_time = db.Column(db.DateTime)
 
     def __repr__(self):
         return f'<Submission for prompt {self.prompt_id} by user>'

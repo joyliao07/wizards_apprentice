@@ -1,3 +1,4 @@
+import pytz
 from uuid import uuid4
 from datetime import datetime, timedelta
 from os.path import splitext
@@ -63,11 +64,14 @@ def play():
         f.save(file_path)
 
         try:
+            my_date = datetime.now(pytz.timezone('US/Pacific'))
+
             submission = Submission(
                 image_path=filename,
                 prompt_id=prompt.id,
                 submitted_by=session.get('account_id'),
                 passes_prompt=False,
+                submission_time=my_date
             )
 
             db.session.add(submission)
