@@ -1,5 +1,6 @@
 PIXEL_PERCENTAGE = .2
-COLOR_DETECTION_THRESHOLD = 1.2
+COLOR_DETECTION_THRESHOLD = 20
+RED_GREEN_THRESHOLD = 5
 
 
 def evaluate_submission(image, prompt):
@@ -16,38 +17,25 @@ def evaluate_submission(image, prompt):
     adjective, noun = prompt
 
     # Is the prompt object in this image?
-    if noun in image.keywords:
-        object_found = True
-
-    # color_found = score_colors(image.colors, adjective)
-    color_found = score_colors_highest_pixel_fractions(image.colors, adjective)
+    for keyword in image.keywords:
+        if noun in keyword:
+            object_found = True
+            break
+    color_found = find_target_color(image.colors, adjective)
     return (color_found, object_found)
 
 
-def score_colors(color_data, target_color):
-    """Looks through all of the rgb value sets and returns True if any one of them has a higher
-    value for the target color than the other two.
-    """
-    # Make a list of colors we don't want
-    bad_colors = [c for c in ['red', 'green', 'blue'] if c != target_color]
-    # import pdb; pdb.set_trace()
-    # Iterate over all the rgb values found in the image
-    for detected_rgb in color_data:
-        # Compare each excluded color to the target color
-        for bad_color in bad_colors:
-            # If the target color value is less than one of the excluded, break
-            if eval(f'detected_rgb.color.{ target_color }') <= eval(f'detected_rgb.color.{ bad_color }'):
-                break
-        else:
-            # If we get here, at least one rgb was primarily our target color
-            return True
-    return False
+def find_target_color(color_data, target_color):
+    """Looks through all of the rgb value sets and totals the proportion of pixels
+    that are primarily the target color.
 
-
-def score_colors_highest_pixel_fractions(color_data, target_color):
-    """Looks through all of the rgb value sets and returns True if any one of them has a higher
-    value for the target color than the other two. Only checks the highest pixel ratios.
+    input: color_data: color data extracted from image object, represented by rgb values
+            and pixel_fraction
+    input: target_color (string): the color we are trying to find
+    return: True if proportion of target_color pixels > PIXEL_PERCENTAGE
+    return: False if proportion of target_color pixels < PIXEL_PERCENTAGE
     """
+    target_pixel_fraction = 0
     # import pdb; pdb.set_trace()
     # Sum all the pixel_fraction values
     pixel_fractions = sum([rgb.pixel_fraction for rgb in color_data])
@@ -55,19 +43,20 @@ def score_colors_highest_pixel_fractions(color_data, target_color):
     bad_colors = [c for c in ['red', 'green', 'blue'] if c != target_color]
     # Iterate over all the rgb values found in the image
     for detected_rgb in color_data:
-
-        # Calculate the pixel percentage of this rgb
-        pixels_percent = detected_rgb.pixel_fraction / pixel_fractions
-        # import pdb; pdb.set_trace()
-        if pixels_percent >= PIXEL_PERCENTAGE:
-            # Compare each excluded color to the target color
-            for bad_color in bad_colors:
-                # If the target color value is less than one of the excluded, break
-                if eval(f'detected_rgb.color.{ target_color }') / eval(f'detected_rgb.color.{ bad_color }') < COLOR_DETECTION_THRESHOLD:
+        # Is this region majority target_color?
+        for bad_color in bad_colors:
+            color_diff = eval(f'detected_rgb.color.{ target_color }') - eval(f'detected_rgb.color.{ bad_color }')
+            # If target_color is green, we need to be more lenient about the proportion of red
+            if target_color == 'green' and bad_color == 'red':
+                if abs(color_diff) < RED_GREEN_THRESHOLD:
                     break
-            else:
-                # If we get here, at least one rgb was primarily our target color
-                print('Finding:', target_color)
-                print(detected_rgb)
-                return True
+            # If the target color value is less than one of the excluded, break
+            elif color_diff < COLOR_DETECTION_THRESHOLD:
+                break
+        else:
+            # If we get here, the region was majority target_color
+            target_pixel_fraction += detected_rgb.pixel_fraction
+
+    if target_pixel_fraction / pixel_fractions >= PIXEL_PERCENTAGE:
+        return True
     return False
