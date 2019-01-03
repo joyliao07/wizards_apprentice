@@ -1,4 +1,4 @@
-# Wizard's Apprentice (0.0.0)
+# Wizard's Apprentice (1.0.0)
 The wizard needs your help - he needs to fight the evil dragon, but he forgot what the tool for his latest spell looks like. Take pictures of what his tool looks like and the wizard will award you with points - compete with your friends for top points.
 
 ## Authors
@@ -15,8 +15,10 @@ Users have a unique login where their own points are tracked.
 - look at photo headers to determine that the photo was taken the same day (to avoid cheating)
 - add a report feature in case it's obvious the photo is just a stock photo
 
-
 ## Getting Started
+Navigate to https://rebrand.ly/wizards_apprentice.  
+
+To run locally:  
 1. Enter a new virtual environment: `pipenv shell --python 3.6`
 2. Install dependencies: `pipenv install`
 3. Create .env file in the root of the project.
@@ -24,7 +26,6 @@ Users have a unique login where their own points are tracked.
 5. Run Flask db init, migration, upgrade
 6. Run the app: `flask run`
 7. Navigate to http://localhost:5000
-
 
 ## Architecture
 Requires Python >= 3.6, Flask, PostgreSQL, Pillow
@@ -35,8 +36,17 @@ Server-side rendered HTML templates using Jinja2.
 ### Backend
 Flask, PostgreSQL. Deployed on EC2 (Ubuntu 18.04) running Nginx and Gunicorn
 
-## API
-<!-- Provide detailed instructions for your applications usage. This should include any methods or endpoints available to the user/client/developer. Each section should be formatted to provide clear syntax for usage, example calls including input data requirements and options, and example responses or return values. -->
+## Credits
+
+### Sample code/tutorials used
+
+- [Uploading files to S3 from Flask](http://zabana.me/notes/upload-files-amazon-s3-flask.html)
+- [Styling HTML5 form file uploads](https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/)
+
+### Assets Used
+
+- [Free Pixel Art Forest](https://edermunizz.itch.io/free-pixel-art-forest) - Website background
+- [NES.css](https://github.com/nostalgic-css/NES.css) - NES-style CSS framework
 
 
 ## Change Log
