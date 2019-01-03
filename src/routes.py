@@ -20,8 +20,8 @@ from .submissions import evaluate_submission
 from .prompt import random_generator
 from .validate_image import validate_image
 from .route_helpers import upload_file_to_s3
-
 from . import app
+
 
 
 @app.route('/')
@@ -48,23 +48,40 @@ def play():
 
     prompt = Prompt.query.order_by(Prompt.id.desc()).first()
 
-    # To obtain user's last successful prompt submission:
-    user = g.user.id
-    last_successful_submission = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).order_by(Submission.submission_time.desc()).first().prompt_id
-
     # To obatain the last prompt
     prompts = Prompt.query.all()
     to_last = prompts[-2].id
 
+
+    # To obtain user's last successful prompt submission:
+    user = g.user.id
     try:
-        if session.get('prompt') != prompt:
-            #it means the prompt has been changed from the last play session
-            if last_successful_submission != to_last:
-                flash('someone else has got the answer!')
+        last_successful_submission = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).order_by(Submission.submission_time.desc()).first().prompt_id
+    except:
+        last_successful_submission = ''
+
+    try:
+        try:
+            if session.get('flash') == 'on':
+                # session flash 'on' means the initial flash had been done
+                if session.get('prompt') != prompt.id:
+                    flash('someone else has got the last prompt!')
+            else:
+                # To produce the initial flash:
+                if session.get('prompt') != prompt.id:
+                    print('session prompt is: ', session.get('prompt'))
+                    print('prompt is: ', prompt.id)
+                    if last_successful_submission != to_last:
+                        flash('someone else has got the last prompt!')
+                        session['flash'] = 'on'
+        except:
+            # Comes here if session 'flash' does not exist:
+            pass
     except:
         pass
 
     session['prompt'] = prompt.id
+
 
 
     if prompt is None:
