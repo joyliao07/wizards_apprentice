@@ -10,9 +10,22 @@
 
 
 body {
-    background-color: whitesmoke;
+    background-color: #e1e1e1;
     font-family: 'Source Code Pro';
     font-size: 20px;
+}
+
+body {
+    background-image: url('../images/Background4.png');
+    /* background-attachment: fixed; */
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: auto 780px;
+
+}
+
+.nes-container {
+    z-index: 5;
 }
 
 
