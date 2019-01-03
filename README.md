@@ -27,7 +27,7 @@ Users have a unique login where their own points are tracked.
 
 
 ## Architecture
-Requires Python >= 3.6, Flask, PostgreSQL
+Requires Python >= 3.6, Flask, PostgreSQL, Pillow
 
 ### Frontend
 Server-side rendered HTML templates using Jinja2.
