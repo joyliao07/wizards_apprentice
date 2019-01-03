@@ -16,6 +16,7 @@ coverage = "*"
 flask-wtf = "*"
 google-cloud-vision = "*"
 flask-migrate = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.6"

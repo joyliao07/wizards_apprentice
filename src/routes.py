@@ -5,7 +5,7 @@ from os.path import splitext
 from os.path import join as path_join
 from os import remove as remove_file
 
-from flask import Flask, request, render_template, redirect, url_for, session, abort, flash, session, g
+from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import func
 
@@ -17,6 +17,7 @@ from .models import db, Submission, Prompt, Account
 from .gvision import ProcessedImage
 from .submissions import evaluate_submission
 from .prompt import random_generator
+from .validate_image import validate_image
 
 from . import app
 
@@ -62,6 +63,10 @@ def play():
         filename = secure_filename(str(uuid4()) + ext)
         file_path = path_join(app.root_path, app.config['UPLOAD_FOLDER'], filename)
         f.save(file_path)
+
+        if not validate_image(file_path):
+            remove_file(file_path)
+            return render_template('pages/cheater.html')
 
         try:
             time_pacific = datetime.now() + timedelta(hours=-8)
