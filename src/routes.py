@@ -61,22 +61,15 @@ def play():
         last_successful_submission = ''
 
     try:
-        try:
-            if session.get('flash') == 'on':
-                # session flash 'on' means the initial flash had been done
-                if session.get('prompt') != prompt.id:
-                    flash('someone else has got the last prompt!')
-            else:
-                # To produce the initial flash:
-                if session.get('prompt') != prompt.id:
-                    print('session prompt is: ', session.get('prompt'))
-                    print('prompt is: ', prompt.id)
-                    if last_successful_submission != to_last:
-                        flash('someone else has got the last prompt!')
-                        session['flash'] = 'on'
-        except:
-            # Comes here if session 'flash' does not exist:
-            pass
+        if session.get('flash') == 'on':
+            # session flash 'on' means the initial flash had been done
+            if session.get('prompt') != prompt.id:
+                flash('someone else has got the last prompt!')
+        else:
+            # To produce the initial flash:
+            if last_successful_submission != to_last:
+                flash('someone else has got the last prompt!')
+                session['flash'] = 'on'
     except:
         pass
 
