@@ -26,7 +26,7 @@
   {% for what in history %}
     <div class="nes-container is-dark history-image">
       <p>{{ what.adjective.title() }} {{ what.noun.title() }} ({{ what.result }})</p>
-      <img src="uploads/{{ what.image }}" alt="User's image for {{ what.adjective.title() }} {{ what.noun.title() }}">
+      <img src="{{ what.image }}" alt="User's image for {{ what.adjective.title() }} {{ what.noun.title() }}">
       <p class="player-username">By: {{ g.user.username }}</p>
       <p class="submitted-date">{{ what.time }}</p>
     </div>
