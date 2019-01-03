@@ -48,6 +48,25 @@ def play():
 
     prompt = Prompt.query.order_by(Prompt.id.desc()).first()
 
+    # To obtain user's last successful prompt submission:
+    user = g.user.id
+    last_successful_submission = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).order_by(Submission.submission_time.desc()).first().prompt_id
+
+    # To obatain the last prompt
+    prompts = Prompt.query.all()
+    to_last = prompts[-2].id
+
+    try:
+        if session.get('prompt') != prompt:
+            #it means the prompt has been changed from the last play session
+            if last_successful_submission != to_last:
+                flash('someone else has got the answer!')
+    except:
+        pass
+
+    session['prompt'] = prompt.id
+
+
     if prompt is None:
         random_generator()
         prompt = Prompt.query.order_by(Prompt.id.desc()).first()
