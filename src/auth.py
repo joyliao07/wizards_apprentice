@@ -80,6 +80,8 @@ def login():
             session['admin'] = False
             flash('You have logged in successfully')
 
+            session['flash'] = 'off'
+
             if account.email == os.getenv('ADMIN_USER'):
                 session['admin'] = True
                 flash('admin login')
