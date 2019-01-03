@@ -63,7 +63,7 @@ def play():
     try:
         if session.get('flash') == 'on':
             # session flash 'on' means the initial flash had been done
-            if session.get('prompt') != prompt.id:
+            if session.get('prompt') != prompt.id and last_successful_submission != to_last:
                 flash('someone else has got the last prompt!')
         else:
             # To produce the initial flash:
