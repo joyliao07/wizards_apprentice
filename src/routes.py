@@ -1,4 +1,5 @@
 import pytz
+import os
 from uuid import uuid4
 from datetime import datetime, timedelta
 from os.path import splitext
@@ -18,6 +19,7 @@ from .gvision import ProcessedImage
 from .submissions import evaluate_submission
 from .prompt import random_generator
 from .validate_image import validate_image
+from .route_helpers import upload_file_to_s3
 
 from . import app
 
@@ -56,7 +58,7 @@ def play():
         f = form.file_upload.data
         ext = splitext(f.filename)[1]
 
-        if ext not in allowed_filetypes:
+        if ext.lower() not in allowed_filetypes:
             flash('File must be a .png or a .jpg/.jpeg')
             return redirect(url_for('.play'))
 
@@ -68,11 +70,14 @@ def play():
             remove_file(file_path)
             return render_template('pages/cheater.html')
 
+        new_filename = upload_file_to_s3(open(file_path, 'rb'), filename, ext, "wizardphoto", acl="public-read")
+        print(new_filename)
+
         try:
             time_pacific = datetime.now() + timedelta(hours=-8)
 
             submission = Submission(
-                image_path=filename,
+                image_path=new_filename,
                 prompt_id=prompt.id,
                 submitted_by=session.get('account_id'),
                 passes_prompt=False,
@@ -82,7 +87,7 @@ def play():
             db.session.add(submission)
             db.session.commit()
 
-            session['recent_image_path'] = filename
+            session['recent_image_path'] = new_filename
             session['recent_submission_id'] = submission.id
             return redirect(url_for('.submission'))
 
