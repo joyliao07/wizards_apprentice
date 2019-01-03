@@ -1,4 +1,6 @@
 import pytz
+import os
+import boto3, botocore
 from uuid import uuid4
 from datetime import datetime, timedelta
 from os.path import splitext
@@ -63,6 +65,12 @@ def play():
         file_path = path_join(app.root_path, app.config['UPLOAD_FOLDER'], filename)
         f.save(file_path)
 
+        # TRY TO UPLOAD PICTURE TO S3 HERE:
+        # If passing in "f", error: expecting string or bytes-like object
+        # If passing in "file_path", error: Fileobj must implement read
+
+        upload_file_to_s3(f, "wizardphoto", acl="public-read")
+
         try:
             time_pacific = datetime.now() + timedelta(hours=-8)
 
@@ -87,6 +95,38 @@ def play():
             return redirect(url_for('.submission'))
 
     return render_template('pages/play.html', form=form, prompt=prompt)
+
+
+s3 = boto3.client(
+   "s3",
+   aws_access_key_id=os.environ.get('S3_KEY'),
+   aws_secret_access_key=os.environ.get('S3_SECRET_ACCESS_KEY'),
+)
+
+
+def upload_file_to_s3(file, bucket_name, acl="public-read"):
+    """
+    Docs: http://zabana.me/notes/upload-files-amazon-s3-flask.html
+    """
+    try:
+        print('trying file upload')
+        s3.upload_fileobj(
+            file,
+            bucket_name,
+            file.filename,
+            ExtraArgs={
+                "ACL": acl,
+                "ContentType": file.content_type
+            }
+        )
+        new_path="{}{}".format('https://s3-us-west-1.amazonaws.com/wizardphoto/', file.filename)
+
+    except Exception as e:
+        print('error msg from upload')
+        print("Something Happened: ", e)
+        return e
+
+    return "{}{}".format(app.config["S3_LOCATION"], file.filename)
 
 
 @app.route('/submission', methods=['GET', 'POST'])
