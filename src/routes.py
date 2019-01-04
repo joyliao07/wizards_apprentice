@@ -194,13 +194,15 @@ def history():
 
     # To get the number of submission today:
 
-    date = datetime.now().date()
+    now = datetime.now()
+    today_time = now + timedelta(hours=-8)
+    today_date = today_time.date()
+    # date = datetime.now().date()
 
-    today_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).filter(func.date(Submission.submission_time) == date).count()
+    today_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).filter(func.date(Submission.submission_time) == today_date).count()
 
     # To get the number of submission of the past week:
 
-    now = datetime.now()
     week_ago = now - timedelta(days=7)
 
     week_count = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).filter(Submission.submission_time > week_ago).count()
