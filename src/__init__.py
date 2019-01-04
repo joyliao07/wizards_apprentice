@@ -17,12 +17,4 @@ app.config.from_mapping(
     UPLOAD_FOLDER=os.getenv('UPLOAD_FOLDER'),
 )
 
-app.config.from_mapping(
-    S3_BUCKET=os.environ.get("wizardphoto"),
-    S3_LOCATION='http://{}.s3.amazonaws.com/'.format(os.environ.get("wizardphoto")),
-    SECRET_KEY=os.urandom(32),
-    DEBUG=True,
-    PORT=5000
-)
-
 from . import routes, forms, models, exceptions, auth
