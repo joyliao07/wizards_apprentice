@@ -48,38 +48,40 @@ def play():
 
     prompt = Prompt.query.order_by(Prompt.id.desc()).first()
 
-    # To obatain the last prompt
-    prompts = Prompt.query.all()
-    to_last = prompts[-2].id
-
-
-    # To obtain user's last successful prompt submission:
-    user = g.user.id
-    try:
-        last_successful_submission = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).order_by(Submission.submission_time.desc()).first().prompt_id
-    except:
-        last_successful_submission = ''
-
-    try:
-        if session.get('flash') == 'on':
-            # session flash 'on' means the initial flash had been done
-            if session.get('prompt') != prompt.id and last_successful_submission != to_last:
-                flash('someone else has got the last prompt!')
-        else:
-            # To produce the initial flash:
-            if last_successful_submission != to_last:
-                flash('someone else has got the last prompt!')
-                session['flash'] = 'on'
-    except:
-        pass
-
-    session['prompt'] = prompt.id
-
-
-
     if prompt is None:
         random_generator()
         prompt = Prompt.query.order_by(Prompt.id.desc()).first()
+
+    # To obatain the last prompt
+    prompts = Prompt.query.all()
+    try:
+        to_last = prompts[-2].id
+    except IndexError:
+        to_last = None
+
+
+    if to_last:
+        # To obtain user's last successful prompt submission:
+        user = g.user.id
+        try:
+            last_successful_submission = Submission.query.filter(Submission.submitted_by == user).filter(Submission.passes_prompt == True).order_by(Submission.submission_time.desc()).first().prompt_id
+        except:
+            last_successful_submission = ''
+
+        try:
+            if session.get('flash') == 'on':
+                # session flash 'on' means the initial flash had been done
+                if session.get('prompt') != prompt.id and last_successful_submission != to_last:
+                    flash('someone else has got the last prompt!')
+            else:
+                # To produce the initial flash:
+                if last_successful_submission != to_last:
+                    flash('someone else has got the last prompt!')
+                    session['flash'] = 'on'
+        except:
+            pass
+
+    session['prompt'] = prompt.id
 
     if form.validate_on_submit():
         allowed_filetypes = set(['.png', '.jpg', '.jpeg'])
