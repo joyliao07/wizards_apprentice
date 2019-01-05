@@ -1,0 +1,67 @@
+/* --- add fonts --- */
+
+@font-face {
+    font-family: 'LB';
+    src: url('../font/8bitlim.ttf')
+}
+
+
+/* --- body/html styles --- */
+
+
+body {
+    background-color: #e1e1e1;
+    background-image: url('../images/Background4.png');
+    background-position: top;
+    background-repeat: repeat-x;
+    background-size: auto 780px;
+    font-family: 'Source Code Pro';
+    font-size: 20px;
+}
+
+
+/* --- text --- */
+
+h1 {
+    font-family: LB;
+    font-size: 3em;
+}
+
+@media (max-width: 899px) {
+    h1 {
+        font-size: 2em;
+    }
+}
+
+a {
+    color: #429dff;
+}
+
+a:hover,
+a:active {
+    color: #1f8bff;
+}
+
+a,
+a:hover,
+a:active {
+    font-weight: normal;
+    text-decoration: none;
+}
+
+@media (max-width: 899x) {
+    main .nes-container p {
+        font-size: 16px;
+    }
+}
+
+
+/* --- other elements --- */
+
+.nes-input {
+    margin-bottom: 2em;
+}
+
+img {
+    max-width: 100%;
+}

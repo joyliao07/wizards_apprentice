@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Method not allowed{% endblock %}
+
+{% block content %}
+<div class="nes-container is-dark">
+Are you trying to pull a fast one on the wizard? I don't think so. <a href="{{ url_for('.home') }}">Go home</a>
+</div>
+{% endblock %}

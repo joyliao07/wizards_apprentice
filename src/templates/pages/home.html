@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome{% endblock title %}
+
+{% block content %}
+  {% if g.user %}
+    <div class="{% include 'partials/wizard_text.html' %}">
+      <p>Welcome back, my apprentice! I have forgotten my tools again... Please click "play" to send me photos and remind me!</p>
+      <p>Or, click "My History" to view your past submissions.</p>
+      <p>You can also click "All Players" to see how the other apprentices are doing.</p>
+    </div>
+  {% else %}
+    <div class="{% include 'partials/wizard_text.html' %}">
+      <p>Welcome! You must be the new apprentice. I am working on my latest spell, but in my old age I've forgotten what the tools look like! I need your help to remind me.</p>
+      <p>Send me photos of the tool I need to remind me and I will reward you with points. Compete with other apprentices to get the most points!</p>
+      <p>Click <a href="{{ url_for('.register') }}">register</a> or <a href="{{ url_for('.login') }}">login</a> to start playing!</p>
+    </div>
+  {% endif %}
+  {% include 'partials/wizard_neutral.html' %}
+{% endblock content %}
