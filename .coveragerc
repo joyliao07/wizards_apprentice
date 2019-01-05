@@ -1,4 +1,0 @@
-[run]
-source = wizards_apprentice
-omit = tests/*
-

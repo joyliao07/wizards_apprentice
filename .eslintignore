@@ -1,3 +1,0 @@
-**/*.min.js
-**/vendor/**/*.js
-node_modules/**.js
