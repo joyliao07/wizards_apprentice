@@ -101,7 +101,7 @@ def play():
             remove_file(file_path)
             return render_template('pages/cheater.html')
 
-        new_filename = upload_file_to_s3(open(file_path, 'rb'), filename, ext, "wizardphoto", acl="public-read")
+        new_filename = upload_file_to_s3(open(file_path, 'rb'), filename, ext, "s3wizard", acl="public-read")
         print(new_filename)
 
         try:

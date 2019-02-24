@@ -24,7 +24,7 @@ def upload_file_to_s3(file, filename, extension, bucket_name, acl="public-read")
                 "ContentType": f'image/{extension}'
             }
         )
-        new_path = "{}{}".format('https://s3-us-west-1.amazonaws.com/wizardphoto/', filename)
+        new_path = "{}{}".format('https://s3-us-west-2.amazonaws.com/s3wizard/', filename)
 
     except Exception as e:
         print('error msg from upload')
