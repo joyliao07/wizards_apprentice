@@ -19,4 +19,4 @@ def test_instance(app):
 def test_labels(app):
     img_source = 'src/test/test_images/test_full_match.png'
     image = ProcessedImage(img_source)
-    assert 'chair' in image.keywords
+    assert 'Chair' in image.keywords
