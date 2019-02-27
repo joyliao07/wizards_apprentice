@@ -1,4 +1,4 @@
 [run]
 source = wizards_apprentice
-omit = src/test/*, src/auth.py
+omit = src/test/*, src/auth.py, src/wsgi.py, src/prompt.py, src/exceptions.py
 
